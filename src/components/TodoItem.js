@@ -8,25 +8,31 @@ const Todo = styled(List.Item)`
   cursor: pointer;
   transition: all 0.3s;
   padding-left: 5px;
-
-  &:hover {
-    background: #f1f1f1;
-  }
+  text-decoration-line: ${props => (props.completed ? 'line-through' : 'none')};
+  display: flex;
+  justify-content: space-between;
 `;
 
-class TodoItem extends Component {
+const StyledSpan = styled.span`
+  padding-right: 6px;
+`
 
-  handleToggleTodo = (id) => {
-    this.props.toggleTodo(id)
-  }
+class TodoItem extends Component {
+  handleToggleTodo = id => {
+    this.props.toggleTodo(id);
+  };
 
   render() {
+    const { todoId, completed, children } = this.props;
     return (
-      <Todo onClick={() => {
-        this.handleToggleTodo(this.props.todoId)
-      }}>
-        {this.props.children}
-        <Checkbox type="danger" checked={this.props.completed} />
+      <Todo
+        onClick={() => {
+          this.handleToggleTodo(todoId);
+        }}
+        completed={completed}
+      >
+        <StyledSpan>{children}</StyledSpan>
+        <Checkbox type="danger" checked={completed} />
       </Todo>
     );
   }
@@ -36,6 +42,7 @@ const mapDispatchToProps = dispatch => ({
   toggleTodo: id => dispatch(toggleTodo(id))
 });
 
-
-
-export default connect(undefined, mapDispatchToProps)(TodoItem);
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(TodoItem);
