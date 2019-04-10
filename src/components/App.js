@@ -1,36 +1,63 @@
 import React, { Component } from 'react';
 import { Button, Card, Row, Col, Input, List } from 'antd';
-import { withFormik, Form } from 'formik';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
+import TodoItem from './TodoItem';
 
 class App extends Component {
   state = {
-    todo: ['Help people', 'Eat sausages', 'Peepee']
+    todoInput: ''
   };
 
+  handleChange = e => {
+    const todoInput = e.target.value;
+    this.setState({ todoInput });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    this.props.addTodo(this.state.todoInput);
+    this.setState({ todoInput: '' });
+    console.log(this.state.todos);
+  };
+
+  toggleTodo = () => {};
+
   renderTodos() {
-    this.state.todo.map(todo => todo);
+    this.state.todos.map(todo => todo);
   }
 
   render() {
-    const { handleChange } = this.props;
     return (
       <>
         <Row type="flex" justify="center">
           <Col span={6}>
-            <Card title="Default size card">
+            <Card title="Todo List">
               <List
-                dataSource={this.state.todo}
-                renderItem={item => <li>{item}</li>}
-              ></List>
-              <Form>
-                <Input
-                  name="todoTitle"
-                  type="text"
-                  placeholder="Something to do!"
-                  onChange={handleChange}
-                />
-                <Button htmlType="submit">Add Todo</Button>
-              </Form>
+                dataSource={this.props.todos}
+                renderItem={item => (
+                  <TodoItem todoId={item.id} completed={item.completed}>{item.text}</TodoItem>
+                )}
+              />
+              <form onSubmit={this.onSubmit}>
+                <Row type="flex" justify="space-between">
+                  <Col span={17}>
+                    <Input
+                      name="todoTitle"
+                      type="text"
+                      placeholder="Something to do!"
+                      onChange={this.handleChange}
+                      value={this.state.todoInput}
+                    />
+                  </Col>
+                  <Col span={6}>
+                    <Button htmlType="submit" type="primary" ghost>
+                      Add Todo
+                    </Button>
+                  </Col>
+                </Row>
+              </form>
             </Card>
           </Col>
         </Row>
@@ -39,15 +66,15 @@ class App extends Component {
   }
 }
 
-const FormikTodoForm = withFormik({
-  mapPropsToValues() {
-    return {
-      todoTitle: ''
-    };
-  },
-  handleSubmit({ todoTitle }) {
-    console.log(todoTitle);
-  }
-})(App);
+const mapDispatchToProps = dispatch => ({
+  addTodo: todo => dispatch(addTodo(todo))
+});
 
-export default FormikTodoForm;
+const mapStateToProps = state => {
+  return { todos: state.todos };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

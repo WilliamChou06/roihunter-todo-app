@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
-import todoReducer from '../reducers/todoReducer';
+import rootReducer from '../reducers';
 
 export default () => {
-  const store = createStore(todoReducer);
+  const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
   return store;
 };
