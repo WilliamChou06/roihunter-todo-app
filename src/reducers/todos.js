@@ -1,5 +1,4 @@
 const todoDefaultState = [];
-const todos = [];
 
 const todoReducer = (state = todoDefaultState, action) => {
   switch (action.type) {
@@ -12,6 +11,7 @@ const todoReducer = (state = todoDefaultState, action) => {
           : todo
       );
     case 'SET_TODOS':
+      const todos = [];
       for (let key in action.todos) {
         todos.push(action.todos[key]);
       }

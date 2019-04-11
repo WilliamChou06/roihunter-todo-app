@@ -32,7 +32,7 @@ export const startToggleTodo = id => {
   return (dispatch, getState) => {
     const state = getState();
     const todo = state.todos.find(todo => todo.id === id);
-    console.log(todo.isCompleted);
+    console.log(todo);
     return axios
       .patch(
         `http://localhost:9000/api/todos/${id}`,
@@ -74,8 +74,11 @@ export const getSession = sessionId => ({
 export const startGetSession = () => {
   return dispatch => {
     return axios
-      .post('http://localhost:9000/api/session', { errorRate: 50 })
-      .then(res => localStorage.setItem('sessionId', res.data.sessionId))
+      .post('http://localhost:9000/api/session', { errorRate: 0 })
+      .then(res => {
+        localStorage.setItem('sessionId', res.data.sessionId);
+        dispatch(startSetTodos());
+      })
       .catch(err => console.log(err.response));
   };
 };

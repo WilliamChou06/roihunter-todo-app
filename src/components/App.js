@@ -63,14 +63,16 @@ class App extends Component {
     console.log(this.state.todos);
   };
 
-  toggleTodo = () => {};
 
   renderTodos() {
     this.state.todos.map(todo => todo);
   }
 
-  componentDidMount() {
+  handleStartup = () => {
     this.props.startGetSession();
+  };
+
+  componentDidMount() {
     this.props.startSetTodos();
   }
 
@@ -78,6 +80,7 @@ class App extends Component {
     return (
       <AppWrapper type="flex" justify="center">
         <StyledCard title="Todo List">
+          <Button onClick={this.handleStartup}>New session</Button>
           <List
             dataSource={this.props.todos}
             renderItem={item => (
