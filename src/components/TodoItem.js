@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleTodo } from '../actions';
+import { startToggleTodo } from '../actions';
 import { List, Checkbox } from 'antd';
 import styled from 'styled-components';
 
@@ -8,7 +8,7 @@ const Todo = styled(List.Item)`
   cursor: pointer;
   transition: all 0.3s;
   padding-left: 5px;
-  text-decoration-line: ${props => (props.completed ? 'line-through' : 'none')};
+  text-decoration-line: ${props => (props.isCompleted ? 'line-through' : 'none')};
   display: flex;
   justify-content: space-between;
 `;
@@ -19,27 +19,27 @@ const StyledSpan = styled.span`
 
 class TodoItem extends Component {
   handleToggleTodo = id => {
-    this.props.toggleTodo(id);
+    this.props.startToggleTodo(id);
   };
 
   render() {
-    const { todoId, completed, children } = this.props;
+    const { todoId, isCompleted, children } = this.props;
     return (
       <Todo
         onClick={() => {
           this.handleToggleTodo(todoId);
         }}
-        completed={completed}
+        isCompleted={isCompleted}
       >
         <StyledSpan>{children}</StyledSpan>
-        <Checkbox type="danger" checked={completed} />
+        <Checkbox type="danger" checked={isCompleted} />
       </Todo>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  toggleTodo: id => dispatch(toggleTodo(id))
+  startToggleTodo: id => dispatch(startToggleTodo(id))
 });
 
 export default connect(

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card, Row, Col, Input, List } from 'antd';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { addTodo } from '../actions';
+import { startAddTodo, startGetSession, startSetTodos } from '../actions';
 import TodoItem from './TodoItem';
 
 const StyledCard = styled(Card)`
@@ -58,7 +58,7 @@ class App extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.addTodo(this.state.todoInput);
+    this.props.startAddTodo({ text: this.state.todoInput, urgency: 5 });
     this.setState({ todoInput: '' });
     console.log(this.state.todos);
   };
@@ -69,6 +69,11 @@ class App extends Component {
     this.state.todos.map(todo => todo);
   }
 
+  componentDidMount() {
+    this.props.startGetSession();
+    this.props.startSetTodos();
+  }
+
   render() {
     return (
       <AppWrapper type="flex" justify="center">
@@ -76,7 +81,7 @@ class App extends Component {
           <List
             dataSource={this.props.todos}
             renderItem={item => (
-              <TodoItem todoId={item.id} completed={item.completed}>
+              <TodoItem todoId={item.id} isCompleted={item.isCompleted}>
                 {item.text}
               </TodoItem>
             )}
@@ -107,7 +112,9 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addTodo: todo => dispatch(addTodo(todo))
+  startAddTodo: todo => dispatch(startAddTodo(todo)),
+  startGetSession: () => dispatch(startGetSession()),
+  startSetTodos: () => dispatch(startSetTodos())
 });
 
 const mapStateToProps = state => {
