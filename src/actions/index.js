@@ -77,7 +77,7 @@ export const startGetSession = () => {
       .post('http://localhost:9000/api/session', { errorRate: 0 })
       .then(res => {
         localStorage.setItem('sessionId', res.data.sessionId);
-        dispatch(startSetTodos());
+        dispatch(startSetTodos({}));
       })
       .catch(err => console.log(err.response));
   };
@@ -90,6 +90,20 @@ export const alterSession = () => ({
 export const deleteSession = () => ({
   type: 'DELETE_SESSION'
 });
+
+export const startDeleteSession = () => {
+  return dispatch => {
+    return axios
+      .delete('http://localhost:9000/api/session', {
+        headers: { sessionId: localStorage.getItem('sessionId') }
+      })
+      .then(res => {
+        localStorage.removeItem('sessionId');
+        dispatch(setTodos());
+      })
+      .catch(err => console.log(err.response));
+  };
+};
 
 export const setVisibilityFilter = filter => ({
   type: 'SET_VISIBILITY_FILTER',

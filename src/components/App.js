@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Button, Card, Row, Col, Input, List } from 'antd';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { startAddTodo, startGetSession, startSetTodos } from '../actions';
+import {
+  startAddTodo,
+  startGetSession,
+  startSetTodos,
+  startDeleteSession
+} from '../actions';
 import TodoItem from './TodoItem';
 
 const StyledCard = styled(Card)`
@@ -63,13 +68,16 @@ class App extends Component {
     console.log(this.state.todos);
   };
 
-
   renderTodos() {
     this.state.todos.map(todo => todo);
   }
 
-  handleStartup = () => {
+  handleGetSession = () => {
     this.props.startGetSession();
+  };
+
+  handleDeleteSession = () => {
+    this.props.startDeleteSession();
   };
 
   componentDidMount() {
@@ -80,7 +88,8 @@ class App extends Component {
     return (
       <AppWrapper type="flex" justify="center">
         <StyledCard title="Todo List">
-          <Button onClick={this.handleStartup}>New session</Button>
+          <Button onClick={this.handleGetSession}>New session</Button>
+          <Button onClick={this.handleDeleteSession}>Delete session</Button>
           <List
             dataSource={this.props.todos}
             renderItem={item => (
@@ -117,7 +126,8 @@ class App extends Component {
 const mapDispatchToProps = dispatch => ({
   startAddTodo: todo => dispatch(startAddTodo(todo)),
   startGetSession: () => dispatch(startGetSession()),
-  startSetTodos: () => dispatch(startSetTodos())
+  startSetTodos: () => dispatch(startSetTodos()),
+  startDeleteSession: () => dispatch(startDeleteSession())
 });
 
 const mapStateToProps = state => {
