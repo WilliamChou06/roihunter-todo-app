@@ -77,7 +77,7 @@ export const startGetSession = () => {
       .post('http://localhost:9000/api/session', { errorRate: 0 })
       .then(res => {
         localStorage.setItem('sessionId', res.data.sessionId);
-        dispatch(startSetTodos({}));
+        dispatch(startSetTodos());
       })
       .catch(err => console.log(err.response));
   };
@@ -99,7 +99,7 @@ export const startDeleteSession = () => {
       })
       .then(res => {
         localStorage.removeItem('sessionId');
-        dispatch(setTodos());
+        // dispatch(setTodos());
       })
       .catch(err => console.log(err.response));
   };
