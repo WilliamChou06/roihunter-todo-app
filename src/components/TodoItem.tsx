@@ -19,7 +19,7 @@ const StyledSpan = styled.span`
 
 interface Props {
   todoId: string;
-  isCompleted: boolean;
+  isCompleted?: boolean;
   children: any;
   startToggleTodo(id: string): any;
 }
@@ -38,7 +38,7 @@ class TodoItem extends Component<Props> {
         isCompleted={isCompleted}
       >
         <StyledSpan>{children}</StyledSpan>
-        <Checkbox type="danger" checked={isCompleted} />
+        <Checkbox checked={isCompleted} />
       </Todo>
     );
   }
