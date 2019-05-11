@@ -17,7 +17,13 @@ const StyledSpan = styled.span`
   padding-right: 6px;
 `
 
-class TodoItem extends Component {
+interface Props {
+  todoId: string;
+  isCompleted: boolean;
+  children: any;
+  startToggleTodo(id: string): any;
+}
+class TodoItem extends Component<Props> {
   handleToggleTodo = id => {
     this.props.startToggleTodo(id);
   };

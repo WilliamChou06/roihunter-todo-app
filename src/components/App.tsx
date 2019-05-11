@@ -50,9 +50,31 @@ const AppWrapper = styled(Row)`
   align-content: center;
 `;
 
-class App extends Component {
+interface Todo {
+  id: string;
+  text: string;
+  urgency: number;
+  isCompleted: boolean;
+}
+
+interface Props {
+  startGetSession(): any;
+  startDeleteSession(): any;
+  startSetTodos(): any;
+  startAddTodos(): any;
+  startAddTodo(todo: object): any;
+  todos: Array<Todo>
+
+}
+interface State {
+  todoInput: String;
+  todos: Array<Object>;
+}
+
+class App extends Component<Props, State> {
   state = {
-    todoInput: ''
+    todoInput: '',
+    todos: []
   };
 
   handleChange = e => {
