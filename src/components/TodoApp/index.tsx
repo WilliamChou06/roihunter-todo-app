@@ -1,54 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Card, Row, Col, Input, List } from 'antd';
+import { Button, Row, Col, Input, List } from 'antd';
+import { StyledCard, StyledForm, AppWrapper } from './style';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import {
   startAddTodo,
   startGetSession,
   startSetTodos,
   startDeleteSession
-} from '../actions';
-import TodoItem from './TodoItem';
-
-const StyledCard = styled(Card)`
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-  overflow: hidden;
-  min-height: 360px;
-  min-width: 340px;
-  max-width: 340px;
-
-  .ant-card-body {
-    padding: 0;
-  }
-
-  .ant-card-head-title {
-    text-align: center;
-    font-size: 18px;
-  }
-
-  .ant-spin-container {
-    height: 240px;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    .ant-list-item {
-      word-break: break-all;
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-  }
-`;
-
-const StyledForm = styled.form`
-  padding-left: 12px;
-  padding-right: 24px;
-`;
-
-const AppWrapper = styled(Row)`
-  height: 100vh;
-  align-content: center;
-`;
+} from '../../actions';
+import TodoItem from '../TodoItem';
 
 interface Todo {
   id: string;
