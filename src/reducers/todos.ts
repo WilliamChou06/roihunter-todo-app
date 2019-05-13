@@ -1,4 +1,6 @@
-const todoDefaultState = [];
+import { TodoStore } from './../types/index';
+
+const todoDefaultState  = [];
 
 const todoReducer = (state = todoDefaultState, action) => {
   switch (action.type) {
@@ -12,8 +14,8 @@ const todoReducer = (state = todoDefaultState, action) => {
       );
     case 'SET_TODOS':
       const todos = [];
-      for (let key in action.todos) {
-        todos.push(action.todos[key]);
+      for (let i in action.todos) {
+        todos.push(action.todos[i]);
       }
       return todos;
     default:

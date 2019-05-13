@@ -1,7 +1,8 @@
 import axios from 'axios';
+import * as constants from '../constants';
 
 export const addTodo = todo => ({
-  type: 'ADD_TODO',
+  type: constants.ADD_TODO,
   todo
 });
 
@@ -20,11 +21,11 @@ export const startAddTodo = todoData => {
 };
 
 export const deleteTodo = () => ({
-  type: 'DELETE_TODO'
+  type: constants.DELETE_TODO
 });
 
 export const toggleTodo = id => ({
-  type: 'TOGGLE_TODO',
+  type: constants.TOGGLE_TODO,
   id
 });
 
@@ -48,8 +49,8 @@ export const startToggleTodo = id => {
   };
 };
 
-export const setTodos = todos => ({
-  type: 'SET_TODOS',
+export const setTodos = (todos?: object) => ({
+  type: constants.SET_TODOS,
   todos
 });
 
@@ -66,10 +67,10 @@ export const startSetTodos = () => {
   };
 };
 
-export const getSession = sessionId => ({
-  type: 'GET_SESSION',
-  sessionId
-});
+// export const getSession = sessionId => ({
+//   type: 'GET_SESSION',
+//   sessionId
+// });
 
 export const startGetSession = () => {
   return dispatch => {
@@ -83,13 +84,13 @@ export const startGetSession = () => {
   };
 };
 
-export const alterSession = () => ({
-  type: 'ALTER_SESSION'
-});
+// export const alterSession = () => ({
+//   type: 'ALTER_SESSION'
+// });
 
-export const deleteSession = () => ({
-  type: 'DELETE_SESSION'
-});
+// export const deleteSession = () => ({
+//   type: 'DELETE_SESSION'
+// });
 
 export const startDeleteSession = () => {
   return dispatch => {
@@ -99,19 +100,19 @@ export const startDeleteSession = () => {
       })
       .then(res => {
         localStorage.removeItem('sessionId');
-        // dispatch(setTodos());
+        dispatch(setTodos());
       })
       .catch(err => console.log(err.response));
   };
 };
 
 export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
+  type: constants.SET_VISIBILITY_FILTER,
   filter
 });
 
 export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
+  SHOW_ALL: constants.SHOW_ALL,
+  SHOW_COMPLETED: constants.SHOW_COMPLETED,
+  SHOW_ACTIVE: constants.SHOW_ACTIVE
 };

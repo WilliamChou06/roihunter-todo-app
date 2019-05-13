@@ -23,7 +23,7 @@ interface Props {
   startSetTodos(): any;
   startAddTodos(): any;
   startAddTodo(todo: object): any;
-  todos: Array<Todo>
+  todos: Todo[]
 
 }
 interface State {
