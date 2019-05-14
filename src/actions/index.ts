@@ -1,7 +1,8 @@
 import axios from 'axios';
 import * as constants from '../constants';
+import { AddTodoAction, ToggleTodoAction, SetTodosAction} from '../types';
 
-export const addTodo = todo => ({
+export const addTodo = (todo): AddTodoAction => ({
   type: constants.ADD_TODO,
   todo
 });
@@ -24,7 +25,7 @@ export const deleteTodo = () => ({
   type: constants.DELETE_TODO
 });
 
-export const toggleTodo = id => ({
+export const toggleTodo = (id) : ToggleTodoAction => ({
   type: constants.TOGGLE_TODO,
   id
 });
@@ -49,7 +50,7 @@ export const startToggleTodo = id => {
   };
 };
 
-export const setTodos = (todos?: object) => ({
+export const setTodos = (todos?: object) : SetTodosAction => ({
   type: constants.SET_TODOS,
   todos
 });

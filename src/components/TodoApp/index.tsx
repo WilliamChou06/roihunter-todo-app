@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy} from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { Button, Row, Col, Input, List } from 'antd';
 import { StyledCard, StyledForm, AppWrapper } from './style';
 import { connect } from 'react-redux';
@@ -8,15 +8,9 @@ import {
   startSetTodos,
   startDeleteSession
 } from '../../actions';
+import { Todo } from '../../types';
 
-const TodoItem = lazy(() => import ('../TodoItem'));
-
-interface Todo {
-  id: string;
-  text: string;
-  urgency: number;
-  isCompleted: boolean;
-}
+const TodoItem = lazy(() => import('../TodoItem'));
 
 interface Props {
   startGetSession(): any;
@@ -78,8 +72,8 @@ class App extends Component<Props, State> {
             renderItem={item => (
               <Suspense fallback={<p>Loading...</p>}>
                 <TodoItem todoId={item.id} isCompleted={item.isCompleted}>
-                {item.text}
-              </TodoItem>
+                  {item.text}
+                </TodoItem>
               </Suspense>
             )}
           />

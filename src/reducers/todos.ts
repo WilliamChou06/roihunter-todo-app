@@ -1,8 +1,8 @@
-import { TodoStore } from './../types/index';
+import { Todo, TodoAppActions } from './../types/index';
 
-const todoDefaultState  = [];
+const todoDefaultState: Todo[] = []
 
-const todoReducer = (state : TodoStore = todoDefaultState, action) => {
+const todoReducer = (state = todoDefaultState, action: TodoAppActions) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [...state, action.todo];
