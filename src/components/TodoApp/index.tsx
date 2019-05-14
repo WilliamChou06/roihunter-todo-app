@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy} from 'react';
 import { Button, Row, Col, Input, List } from 'antd';
 import { StyledCard, StyledForm, AppWrapper } from './style';
 import { connect } from 'react-redux';
@@ -8,7 +8,8 @@ import {
   startSetTodos,
   startDeleteSession
 } from '../../actions';
-import TodoItem from '../TodoItem';
+
+const TodoItem = lazy(() => import ('../TodoItem'));
 
 interface Todo {
   id: string;
@@ -75,9 +76,11 @@ class App extends Component<Props, State> {
           <List
             dataSource={this.props.todos}
             renderItem={item => (
-              <TodoItem todoId={item.id} isCompleted={item.isCompleted}>
+              <Suspense fallback={<p>Loading...</p>}>
+                <TodoItem todoId={item.id} isCompleted={item.isCompleted}>
                 {item.text}
               </TodoItem>
+              </Suspense>
             )}
           />
           <br />
