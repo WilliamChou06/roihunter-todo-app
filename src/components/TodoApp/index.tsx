@@ -26,34 +26,33 @@ interface State {
   todos: Array<Object>;
 }
 
-class App extends Component<Props, State> {
+class TodoApp extends Component<Props, State> {
   state = {
     todoInput: '',
     todos: []
   };
 
-  handleChange = e => {
-    const todoInput = e.target.value;
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const todoInput = e.currentTarget.value;
     this.setState({ todoInput });
   };
 
-  onSubmit = e => {
+  onSubmit = (e: Event): void => {
     e.preventDefault();
 
     this.props.startAddTodo({ text: this.state.todoInput, urgency: 5 });
     this.setState({ todoInput: '' });
-    console.log(this.state.todos);
   };
 
-  renderTodos() {
+  renderTodos(): void {
     this.state.todos.map(todo => todo);
   }
 
-  handleGetSession = () => {
+  handleGetSession = (): void => {
     this.props.startGetSession();
   };
 
-  handleDeleteSession = () => {
+  handleDeleteSession = (): void => {
     this.props.startDeleteSession();
   };
 
@@ -116,4 +115,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(TodoApp);
