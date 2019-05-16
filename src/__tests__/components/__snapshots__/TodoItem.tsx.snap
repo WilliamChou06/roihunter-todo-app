@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test should render TodoItem component correctly 1`] = `ShallowWrapper {}`;
