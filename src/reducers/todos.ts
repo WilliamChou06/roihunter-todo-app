@@ -1,6 +1,6 @@
 import { Todo, TodoAppActions } from './../types/index';
 
-const todoDefaultState: Todo[] = []
+const todoDefaultState: Todo[] = [];
 
 const todoReducer = (state = todoDefaultState, action: TodoAppActions) => {
   switch (action.type) {

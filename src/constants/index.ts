@@ -24,4 +24,3 @@ export type SHOW_COMPLETED = typeof SHOW_COMPLETED;
 
 export const SHOW_ACTIVE = 'SHOW_ACTIVE';
 export type SHOW_ACTIVE = typeof SHOW_ACTIVE;
-
