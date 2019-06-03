@@ -11,11 +11,6 @@ import {
 
 const TodoItem = lazy(() => import('../TodoItem'));
 
-interface State {
-  todoInput: String;
-  todos: Array<Object>;
-}
-
 interface Todo {
   id: string;
   isCompleted: boolean;
@@ -88,17 +83,6 @@ const TodoApp: React.FC = () => {
       </StyledCard>
     </AppWrapper>
   );
-};
-
-const mapDispatchToProps = dispatch => ({
-  startAddTodo: todo => dispatch(startAddTodo(todo)),
-  startGetSession: () => dispatch(startGetSession()),
-  startSetTodos: () => dispatch(startSetTodos()),
-  startDeleteSession: () => dispatch(startDeleteSession()),
-});
-
-const mapStateToProps = state => {
-  return { todos: state.todos };
 };
 
 export default TodoApp;
